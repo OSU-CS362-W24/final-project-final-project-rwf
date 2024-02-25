@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Charts</title>
+    </head>
+    <body>
+        <div id="app">
+            <nav>
+                <ul>
+                    <li><a class="active" href="line.html">Line</a></li>
+                    <li><a href="scatter.html">Scatter</a></li>
+                    <li><a href="bar.html">Bar</a></li>
+                    <li class="right"><a href="./">Gallery</a></li>
+                </ul>
+            </nav>
+            <h1>Line Chart Builder</h1>
+            <main>
+                <div class="chart-builder">
+                    <div class="toolbar">
+                        <label class="chart-title">
+                            Chart title
+                            <input id="chart-title-input">
+                        </label>
+                        <label class="chart-color">
+                            Chart color
+                            <input type="color" id="chart-color-input">
+                        </label>
+                        <button id="generate-chart-btn">Generate chart</button>
+                        <button class="secondary" id="clear-chart-btn">Clear chart data</button>
+                        <button class="secondary" id="save-chart-btn">Save chart</button>
+                    </div>
+                    <div class="content">
+                        <div class="data-entry">
+                            <div id="x-y-data-grid">
+                                <label class="x-label">
+                                    X label
+                                    <input id="x-label-input" />
+                                </label>
+                                <label class="y-label">
+                                    Y label
+                                    <input id="y-label-input" />
+                                </label>
+                                <h4 class="values-header">Values</h4>
+                            </div>
+                            <button id="add-values-btn">+</button>
+                        </div>
+                        <div id="chart-display"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

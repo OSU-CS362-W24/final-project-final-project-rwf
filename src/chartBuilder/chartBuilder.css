@@ -1,0 +1,139 @@
+.chart-builder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.toolbar {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.toolbar label {
+    font-size: 0.8em;
+}
+
+.toolbar input {
+    height: 32px;
+    font-size: 1.25em;
+}
+
+.toolbar button {
+    height: 32px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 300;
+}
+
+.toolbar .chart-title {
+    width: 240px;
+}
+
+.toolbar #chart-title-input {
+    width: 100%;
+}
+
+.toolbar .chart-color {
+    width: 64px;
+    margin-left: 16px;
+}
+
+.toolbar #chart-color-input {
+    width: 100%;
+}
+
+.toolbar #generate-chart-btn {
+    width: 160px;
+    margin-left: auto;
+}
+
+.toolbar #clear-chart-btn {
+    width: 160px;
+    margin-left: 10px;
+}
+
+.toolbar #save-chart-btn {
+    width: 120px;
+    margin-left: 10px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    overflow-y: auto;
+}
+
+.data-entry {
+    width: 240px;
+    padding: 10px;
+    border-right: 1px solid lightgray;
+    overflow-y: auto;
+}
+
+#x-y-data-grid {
+    display: grid;
+    grid-template-columns: 115px 115px;
+    grid-auto-rows: min-content;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#x-y-data-grid label {
+    font-size: 0.8em;
+    height: fit-content;
+}
+
+#x-y-data-grid input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.x-label {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.y-label {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.values-header {
+    grid-row: 2;
+    grid-column: span 2;
+    height: fit-content;
+    align-self: end;
+    margin: 0;
+    border-bottom: 1px solid lightgray;
+    font-size: 1em;
+    text-align: center;
+}
+
+.x-value {
+    grid-column: 1;
+}
+
+.y-value {
+    grid-column: 2;
+}
+
+#add-values-btn {
+    font-size: 1em;
+    line-height: 1.3em;
+}
+
+#chart-display {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart-display img {
+    max-width: 90%;
+    max-height: 90%;
+}

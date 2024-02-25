@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+html {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+}
+
+nav li.right {
+    margin-left: auto;
+}
+
+nav a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: orangered;
+}
+
+nav a:hover {
+    background-color: papayawhip;
+}
+
+nav a.active {
+    color: white;
+    background-color: orangered;
+}
+
+h1 {
+    margin: 10px 20px;
+}
+
+main {
+    flex: 1;
+    overflow-y: hidden;
+}
+
+input {
+    box-sizing: border-box;
+    padding: 2px;
+    border: 1px solid darkgray;
+    border-radius: 2px;
+    font-weight: inherit;
+    font-family: inherit;
+}
+
+button {
+    box-sizing: border-box;
+    font-weight: inherit;
+    background-color: orangered;
+    color: white;
+    padding: 2px 6px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button.secondary {
+    background-color: white;
+    color: orangered;
+    border: 1px solid orangered;
+}
+
+button.secondary[disabled] {
+    color: lightgray;
+    border-color: lightgray;
+    cursor: not-allowed;
+}
