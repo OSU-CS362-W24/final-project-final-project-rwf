@@ -1,6 +1,7 @@
 /**
- * @jest-environment jsdom
- */
+* @jest-environment ./src/fixjsdomenvironment.js
+*/
+
 require("@testing-library/jest-dom");
 require("whatwg-fetch")
 const generateChartImg = require("../generateChartImg");
@@ -20,5 +21,5 @@ test("chart image generation", async function() {
     color = "#ff4500"
 
     let url = await generateChartImg(type, data, xLabel, yLabel, title, color)
-    console.log(url)
+    expect(url.length).toBeGreaterThan(0)
 });
