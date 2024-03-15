@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
-    "test": "jest --verbose=true"
+    "test:unit": "jest -i __tests__/unit/ --verbose=true"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.1",

@@ -2,7 +2,7 @@
  * Verifies that the sort points method is working as intended
  */
 
-const sortPoints = require("../sortPoints");
+const sortPoints = require("../../sortPoints");
 
 test("sort a given list of points", () =>{
 

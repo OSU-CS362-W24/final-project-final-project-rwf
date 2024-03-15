@@ -4,7 +4,7 @@
 
 require("@testing-library/jest-dom");
 require("whatwg-fetch")
-const generateChartImg = require("../generateChartImg");
+const generateChartImg = require("../../generateChartImg");
 
 test("chart image generation", async function() {
 

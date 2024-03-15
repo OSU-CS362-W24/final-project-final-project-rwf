@@ -5,7 +5,7 @@
  */
 
 require("@testing-library/jest-dom");
-const chartStorage = require("../chartStorage")
+const chartStorage = require("../../chartStorage")
 
 
 test("save a chart", () =>{
