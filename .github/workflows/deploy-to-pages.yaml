@@ -7,7 +7,7 @@ jobs:
   build-and-test:
     uses: ./.github/workflows/build-and-test.yaml
     with:
-      upload-pages-artifact: true
+      upload-page-artifact: true
   deploy-to-pages:
     runs-on: ubuntu-latest
     needs: build-and-test
