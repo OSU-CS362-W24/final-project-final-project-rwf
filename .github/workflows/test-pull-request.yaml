@@ -2,4 +2,4 @@ name: Test pull requests
 on: [ pull_request ]
 jobs:
   build-and-test:
-    uses: ./.github/workflows/build-and-test.yml
+    uses: ./.github/workflows/build-and-test.yaml
