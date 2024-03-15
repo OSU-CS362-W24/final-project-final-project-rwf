@@ -1,5 +1,8 @@
 name: "Deploy to GH pages"
-on: [ pull_request ]
+on:
+  push:
+    branches:
+      - main
 jobs: 
   build-and-test:
     uses: ./.github/workflows/build-and-test.yaml
