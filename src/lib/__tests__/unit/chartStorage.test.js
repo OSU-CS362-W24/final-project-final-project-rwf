@@ -7,28 +7,139 @@
 require("@testing-library/jest-dom");
 const chartStorage = require("../../chartStorage")
 
+afterEach(() => {
+    localStorage.clear()
+})
 
-test("save a chart", () =>{
-    chart = {
+test("save one chart", () =>{
+    jest.isolateModules(() => {
+        chart = {
+            type: "scatter",
+            data: [
+                { x: 1, y: 4 },
+                { x: 2, y: 5 },
+                { x: 3, y: 6 },
+            ],
+            xLabel: "TestX",
+            yLabel: "TestY",
+            title: "Test",
+            color: "#ff4500"
+        }
+        chartIndex = 0
+        // Save our generated chart to the localStorage
+        chartStorage.saveChart(chart, chartIndex);
+
+        // Take our created chart and add [] to make it look like it is part of a list as that is how the savedChart would look
+        let stringifiedChart = "[" + JSON.stringify(chart) + "]"
+        let savedChart = localStorage.getItem("savedCharts")
+        expect(savedChart).toBe(stringifiedChart)
+    })
+});
+
+test("save three charts with no defined index", () =>{
+    chart1 = {
         type: "scatter",
         data: [
             { x: 1, y: 4 },
             { x: 2, y: 5 },
             { x: 3, y: 6 },
           ],
-        xLabel: "TestX",
-        yLabel: "TestY",
+        xLabel: "TestX1",
+        yLabel: "TestY1",
+        title: "Test",
+        color: "#ff4500"
+    }
+
+    chart2 = {
+        type: "scatter",
+        data: [
+            { x: 1, y: 4 },
+            { x: 2, y: 5 },
+            { x: 3, y: 6 },
+          ],
+        xLabel: "TestX2",
+        yLabel: "TestY2",
+        title: "Test",
+        color: "#ff4500"
+    }
+
+    chart3 = {
+        type: "scatter",
+        data: [
+            { x: 1, y: 4 },
+            { x: 2, y: 5 },
+            { x: 3, y: 6 },
+          ],
+        xLabel: "TestX3",
+        yLabel: "TestY3",
         title: "Test",
         color: "#ff4500"
     }
     chartIndex = 0
-    // Save our generated chart to the localStorage
-    chartStorage.saveChart(chart, chartIndex);
 
-    // Take our created chart and add [] to make it look like it is part of a list as that is how the savedChart would look
-    let stringifiedChart = "[" + JSON.stringify(chart) + "]"
-    let savedChart = localStorage.getItem("savedCharts")
-    expect(savedChart).toBe(stringifiedChart)
+    // Save our generated chart to the localStorage
+    chartStorage.saveChart(chart1, null);
+    chartStorage.saveChart(chart2, null);
+    chartStorage.saveChart(chart3, null);
+
+    let savedCharts = JSON.parse(localStorage.getItem("savedCharts"))
+
+    expect(savedCharts[0]).toStrictEqual(chart1)
+    expect(savedCharts[1]).toStrictEqual(chart2)
+    expect(savedCharts[2]).toStrictEqual(chart3)
+});
+
+
+test("save three charts with but put the last one first", () =>{
+    chart1 = {
+        type: "scatter",
+        data: [
+            { x: 1, y: 4 },
+            { x: 2, y: 5 },
+            { x: 3, y: 6 },
+          ],
+        xLabel: "TestX1",
+        yLabel: "TestY1",
+        title: "Test",
+        color: "#ff4500"
+    }
+
+    chart2 = {
+        type: "scatter",
+        data: [
+            { x: 1, y: 4 },
+            { x: 2, y: 5 },
+            { x: 3, y: 6 },
+          ],
+        xLabel: "TestX2",
+        yLabel: "TestY2",
+        title: "Test",
+        color: "#ff4500"
+    }
+
+    chart3 = {
+        type: "scatter",
+        data: [
+            { x: 1, y: 4 },
+            { x: 2, y: 5 },
+            { x: 3, y: 6 },
+          ],
+        xLabel: "TestX3",
+        yLabel: "TestY3",
+        title: "Test",
+        color: "#ff4500"
+    }
+    chartIndex = 0
+
+    // Save our generated chart to the localStorage
+    chartStorage.saveChart(chart1, null);
+    chartStorage.saveChart(chart2, null);
+    chartStorage.saveChart(chart3, 0);
+
+    let savedCharts = JSON.parse(localStorage.getItem("savedCharts"))
+
+    expect(savedCharts[0]).toStrictEqual(chart3)
+    expect(savedCharts[1]).toStrictEqual(chart2)
 });
 
 test("load all saved charts", () =>{
