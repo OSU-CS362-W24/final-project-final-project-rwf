@@ -15,6 +15,7 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm run build
+      - run: npm run test:unit
       - if: ${{ inputs.upload-pages-artifact }}
         uses: actions/upload-pages-artifact@v1
         with:
