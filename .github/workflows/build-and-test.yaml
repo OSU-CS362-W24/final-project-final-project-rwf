@@ -2,7 +2,7 @@ name: "Build and test"
 on:
   workflow_call:
     inputs:
-      upload-page-artifact:
+      upload-pages-artifact:
         type: boolean
         required: false
 jobs: 
