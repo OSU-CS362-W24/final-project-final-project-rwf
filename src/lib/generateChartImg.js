@@ -1,3 +1,4 @@
+
 /**
  * This function makes an HTTP POST request to the QuickChart API to generate
  * a chart image.  Once the chart image is generated and returned by the API,
