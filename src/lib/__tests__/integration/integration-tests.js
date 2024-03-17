@@ -114,10 +114,15 @@ test("Alerts displayed for missing chart data", async function () {
 
     // Add references to dom elements for later use
     const titleInput = domTesting.getByLabelText(document, "Chart title");
+    const xLabel = domTesting.getByLabelText(document, "X label");
+    const yLabel = domTesting.getByLabelText(document, "Y label");
     const addPoint = domTesting.getByText(document, "+");
     const generateGraph = domTesting.getByText(document, "Generate chart");
     let xInputs = domTesting.getAllByLabelText(document, "X");
     let yInputs = domTesting.getAllByLabelText(document, "Y");
+
+    // Add inputs
+    await userEvent.type();
 
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
