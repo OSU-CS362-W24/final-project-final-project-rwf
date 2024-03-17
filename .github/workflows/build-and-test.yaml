@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:unit
-      - run: npm run test:e2e
+      - run: npm run test:ete
       - uses: actions/upload-artifact@v3
         with:
           name: e2e-videos
