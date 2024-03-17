@@ -5,6 +5,7 @@
 require("@testing-library/jest-dom");
 const domTesting = require("@testing-library/dom");
 const userEvent = require("@testing-library/user-event").default;
+const GenerateChartImg = require(`${__dirname}/../../../lib/generateChartImg`);
 
 const fs = require("fs");
 const { request } = require("http");
@@ -102,3 +103,43 @@ test("Clearing chart data works correctly", async function () {
     expect(colorPicker).toHaveValue(originalColor);
  });
 
+ /*
+ test("Data correctly sent to chart generation function", async function () {
+    const user = userEvent.setup();
+ 
+    initDOMFromFiles(
+        `${__dirname}/../../../line/line.html`, `${__dirname}/../../../line/line.js`
+    );
+ 
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+    const xLabel = domTesting.getByLabelText(document, "X label");
+    const yLabel = domTesting.getByLabelText(document, "Y label");
+    const chartTitle = domTesting.getByLabelText(document, "Chart title");
+    const addButton = domTesting.getByText(document, "+");
+    const colorPicker = domTesting.getByLabelText(document, "Chart color");
+    const generateButton = domTesting.getByText(document, "Generate chart");
+    const generateChartImgSpy = jest.spyOn(GenerateChartImg, "generateChartImg");
+ 
+    await userEvent.type(xInputs[0], "1");
+    await userEvent.type(yInputs[0], "2");
+    await userEvent.click(addButton);
+    
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+ 
+    await userEvent.type(xInputs[1], "3");
+    await userEvent.type(yInputs[1], "4");
+
+    await userEvent.type(xLabel, "X");
+    await userEvent.type(yLabel, "Y");
+    await userEvent.type(chartTitle, "Title");
+    colorPicker.value = '#ff0000';
+
+    await userEvent.click(generateButton);
+
+    expect(generateChartImgSpy).toHaveBeenCalledWith('line', [[1, 2], [3, 4]], 'X', 'Y', 'Title', '#ff0000');
+
+    generateChartImgSpy.mockRestore();
+ });
+*/
