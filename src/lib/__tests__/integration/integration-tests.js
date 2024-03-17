@@ -111,6 +111,8 @@ test("Alerts displayed for missing chart data", async function () {
         `${__dirname}/../../../line/line.html`,
         `${__dirname}/../../../line/line.js`
     );
+
+    const spy = jest.spyOn(window, "alert");
 });
 
 /*
