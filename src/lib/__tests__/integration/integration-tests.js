@@ -112,6 +112,12 @@ test("Alerts displayed for missing chart data", async function () {
         `${__dirname}/../../../line/line.js`
     );
 
+    const titleInput = domTesting.getByLabelText(document, "Chart title");
+    const addPoint = domTesting.getByText(document, "+");
+    const generateGraph = domTesting.getByText(document, "Generate chart");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
+
     const spy = jest.spyOn(window, "alert");
 });
 
