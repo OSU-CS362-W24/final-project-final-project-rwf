@@ -7,6 +7,9 @@ const domTesting = require("@testing-library/dom");
 const userEvent = require("@testing-library/user-event").default;
 
 const fs = require("fs");
+const { request } = require("http");
+require('whatwg-fetch');
+
 
 function initDOMFromFiles(htmlPath, jsPath){
    const html = fs.readFileSync(htmlPath, 'utf8')
@@ -51,3 +54,51 @@ test("Adding values in the chart builder works correctly", async function () {
    expect(xInputs[2].value).toBe("");
    expect(yInputs[2].value).toBe("");
 });
+
+test("Clearing chart data works correctly", async function () {
+    const user = userEvent.setup();
+ 
+    initDOMFromFiles(
+        `${__dirname}/../../../line/line.html`, `${__dirname}/../../../line/line.js`
+    );
+ 
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+    const xLabel = domTesting.getByLabelText(document, "X label");
+    const yLabel = domTesting.getByLabelText(document, "Y label");
+    const chartTitle = domTesting.getByLabelText(document, "Chart title");
+    const addButton = domTesting.getByText(document, "+");
+    const colorPicker = domTesting.getByLabelText(document, "Chart color");
+    const clearButton = domTesting.getByText(document, "Clear chart data");
+    const originalColor = colorPicker.value;
+ 
+    await userEvent.type(xInputs[0], "1");
+    await userEvent.type(yInputs[0], "2");
+    await userEvent.click(addButton);
+    
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+ 
+    await userEvent.type(xInputs[1], "3");
+    await userEvent.type(yInputs[1], "4");
+
+    await userEvent.type(xLabel, "X");
+    await userEvent.type(yLabel, "Y");
+    await userEvent.type(chartTitle, "Title");
+    colorPicker.value = '#ff0000';
+
+    await userEvent.click(clearButton);
+
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+    
+    expect(xInputs[0].value).toBe("");
+    expect(yInputs[0].value).toBe("");
+    expect(xInputs.length).toBe(1);
+    expect(yInputs.length).toBe(1);
+    expect(xLabel.value).toBe("");
+    expect(xLabel.value).toBe("");
+    expect(chartTitle.value).toBe("");
+    expect(colorPicker).toHaveValue(originalColor);
+ });
+

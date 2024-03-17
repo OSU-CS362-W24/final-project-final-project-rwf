@@ -27,5 +27,8 @@
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/src/__mocks__/styleMock.js"
     }
+  },
+  "dependencies": {
+    "whatwg-fetch": "^3.6.20"
   }
 }
