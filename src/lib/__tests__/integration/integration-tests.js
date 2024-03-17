@@ -105,19 +105,21 @@ test("Clearing chart data works correctly", async function () {
 });
 
 test("Alerts displayed for missing chart data", async function () {
+    // Setup for each test
     const user = userEvent.setup();
-
     initDOMFromFiles(
         `${__dirname}/../../../line/line.html`,
         `${__dirname}/../../../line/line.js`
     );
 
+    // Add references to dom elements for later use
     const titleInput = domTesting.getByLabelText(document, "Chart title");
     const addPoint = domTesting.getByText(document, "+");
     const generateGraph = domTesting.getByText(document, "Generate chart");
     let xInputs = domTesting.getAllByLabelText(document, "X");
     let yInputs = domTesting.getAllByLabelText(document, "Y");
 
+    // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
 });
 
