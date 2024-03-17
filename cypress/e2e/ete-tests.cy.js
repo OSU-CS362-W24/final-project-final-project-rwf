@@ -52,3 +52,21 @@ it('Chart data is maintained across pages', () => {
   cy.findByLabelText("Chart title").should('have.value', "This is the chart Title");
   cy.findByLabelText("Chart color").should('have.value', "#ff0000");
 })
+
+it('Saving a chart to the “gallery” works correctly', () => {
+  cy.visit('/')
+  cy.findByRole("link", { name: "Line" }).click()
+
+  cy.findByLabelText('X label').type("X")
+  cy.findByLabelText('Y label').type("Y")
+  cy.findByLabelText('X').type("1")
+  cy.findByLabelText('Y').type("2")
+  cy.findByLabelText("Chart title").type("assert this title is in the gallery")
+
+  cy.findByRole("button", { name: "Generate chart" }).click()
+  cy.findByRole("button", { name: "Save chart" }).click()
+
+  cy.findByRole("link", { name: "Gallery" }).click()
+
+  cy.findByText("assert this title is in the gallery").should("exist")
+})
