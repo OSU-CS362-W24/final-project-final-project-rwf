@@ -70,3 +70,35 @@ it('Saving a chart to the “gallery” works correctly', () => {
 
   cy.findByText("assert this title is in the gallery").should("exist")
 })
+
+it('Re-opening a saved chart works correctly', () => {
+  cy.visit('/')
+  cy.findByRole("link", { name: "Line" }).click()
+
+  cy.findByLabelText('X label').type("X")
+  cy.findByLabelText('Y label').type("Y")
+  cy.findByLabelText('X').type("1")
+  cy.findByLabelText('Y').type("2")
+  cy.findByLabelText("Chart title").type("Title")
+  cy.findByLabelText('Chart color').invoke('val', '#ff0000').trigger('change');
+
+  cy.findByRole("button", { name: "Generate chart" }).click()
+  cy.findByRole("button", { name: "Save chart" }).click()
+
+  cy.findByRole("link", { name: "Gallery" }).click()
+  // click the chart image to open it
+  cy.document().its("body").find("img").click()
+
+  // assert that the chart is right based on test1 instructions
+  cy.document().its("body").find("img").should("exist");
+  cy.findByLabelText('X label').should('have.value', "X");
+  cy.findByLabelText('Y label').should('have.value', "Y");
+  cy.findAllByLabelText('X').then(($elements) => {
+    cy.wrap($elements[0]).should('have.value', '1');
+  });
+  cy.findAllByLabelText('Y').then(($elements) => {
+    cy.wrap($elements[0]).should('have.value', '2');
+  });
+  cy.findByLabelText("Chart title").should('have.value', "Title");
+  cy.findByLabelText("Chart color").should('have.value', "#ff0000");
+})
