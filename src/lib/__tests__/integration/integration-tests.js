@@ -216,13 +216,14 @@ test("Alerts displayed for missing chart axes", async function () {
 });
 
 test("Data correctly sent to chart generation function", async function () {
+    // Setup for each test
     const user = userEvent.setup();
-
     initDOMFromFiles(
         `${__dirname}/../../../line/line.html`,
         `${__dirname}/../../../line/line.js`
     );
 
+    // Set variables to access DOM elements later
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
     const xLabel = domTesting.getByLabelText(document, "X label");
@@ -231,12 +232,15 @@ test("Data correctly sent to chart generation function", async function () {
     const addButton = domTesting.getByText(document, "+");
     const colorPicker = domTesting.getByLabelText(document, "Chart color");
     const generateButton = domTesting.getByText(document, "Generate chart");
+
+    // Setup the spy on generateChartImg
     const generateChartImgSpy = jest.spyOn(
         GenerateChartImg,
         "generateChartImg"
     );
     spy.mockImplementation(function () {});
 
+    // Add extra coord slots
     await userEvent.click(addButton);
     await userEvent.click(addButton);
     await userEvent.click(addButton);
