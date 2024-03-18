@@ -211,6 +211,9 @@ test("Alerts displayed for missing chart axes", async function () {
     expect(yInputs[2].value).toBe("4");
     expect(xInputs[3].value).toBe("2");
     expect(yInputs[3].value).toBe("8");
+
+    // Release the alert function from the spy
+    spy.mockRestore();
 });
 
 /*
