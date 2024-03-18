@@ -245,6 +245,10 @@ test("Data correctly sent to chart generation function", async function () {
     await userEvent.click(addButton);
     await userEvent.click(addButton);
 
+    // Reset input references
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+
     // Input coordinates
     await user.type(xInputs[0], "4");
     await user.type(yInputs[0], "6");
@@ -254,9 +258,6 @@ test("Data correctly sent to chart generation function", async function () {
     await user.type(yInputs[2], "4");
     await user.type(xInputs[3], "2");
     await user.type(yInputs[3], "8");
-
-    xInputs = domTesting.getAllByLabelText(document, "X");
-    yInputs = domTesting.getAllByLabelText(document, "Y");
 
     await userEvent.type(xInputs[1], "3");
     await userEvent.type(yInputs[1], "4");
