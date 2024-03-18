@@ -182,6 +182,10 @@ test("Alerts displayed for missing chart axes", async function () {
     await userEvent.type(yInputs[2], "4");
     await userEvent.type(xInputs[3], "2");
     await userEvent.type(yInputs[3], "8");
+
+    // Add spy to watch alert method
+    const spy = jest.spyOn(window, "alert");
+    spy.mockImplementation(function () {});
 });
 
 /*
