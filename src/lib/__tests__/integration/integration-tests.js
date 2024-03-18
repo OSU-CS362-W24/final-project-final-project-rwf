@@ -129,6 +129,10 @@ test("Alerts displayed for missing chart data", async function () {
 
     // Generate graph and error message
     await userEvent.click(generateGraph);
+
+    // Assertions
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0]).toBe("Error: No data specified!");
 });
 
 /*
