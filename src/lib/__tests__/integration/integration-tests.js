@@ -5,7 +5,8 @@
 require("@testing-library/jest-dom");
 const domTesting = require("@testing-library/dom");
 const userEvent = require("@testing-library/user-event").default;
-const GenerateChartImg = require(`${__dirname}/../../../lib/generateChartImg`);
+jest.mock(`${__dirname}/../../generateChartImg.js`);
+const GenerateChartImg = require(`${__dirname}/../../generateChartImg.js`);
 
 const fs = require("fs");
 const { request } = require("http");
@@ -233,13 +234,6 @@ test("Data correctly sent to chart generation function", async function () {
     const colorPicker = domTesting.getByLabelText(document, "Chart color");
     const generateButton = domTesting.getByText(document, "Generate chart");
 
-    // Setup the spy on generateChartImg
-    const generateChartImgSpy = jest.spyOn(
-        GenerateChartImg,
-        "generateChartImg"
-    );
-    spy.mockImplementation(function () {});
-
     // Add extra coord slots
     await userEvent.click(addButton);
     await userEvent.click(addButton);
@@ -259,27 +253,27 @@ test("Data correctly sent to chart generation function", async function () {
     await user.type(xInputs[3], "2");
     await user.type(yInputs[3], "8");
 
-    await userEvent.type(xInputs[1], "3");
-    await userEvent.type(yInputs[1], "4");
-
+    // Set extraneous chart data
     await userEvent.type(xLabel, "X");
     await userEvent.type(yLabel, "Y");
     await userEvent.type(chartTitle, "Title");
     colorPicker.value = "#ff0000";
 
+    // Generate graph
     await userEvent.click(generateButton);
 
-    expect(generateChartImgSpy).toHaveBeenCalledWith(
-        "line",
-        [
-            [1, 2],
-            [3, 4],
-        ],
-        "X",
-        "Y",
-        "Title",
-        "#ff0000"
-    );
+    // Assertions
+    expect(GenerateChartImg.mock.calls[0][0]).toBe("line");
+    expect(GenerateChartImg.mock.calls[0][1]).toMatchObject([
+        { x: 4, y: 6 },
+        { x: 1, y: 6 },
+        { x: 9, y: 4 },
+        { x: 2, y: 8 },
+    ]);
+    expect(GenerateChartImg.mock.calls[0][2]).toBe("X");
+    expect(GenerateChartImg.mock.calls[0][3]).toBe("Y");
+    expect(GenerateChartImg.mock.calls[0][4]).toBe("Title");
+    expect(GenerateChartImg.mock.calls[0][5]).toBe("#ff0000");
 
     generateChartImgSpy.mockRestore();
 });
