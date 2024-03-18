@@ -169,6 +169,10 @@ test("Alerts displayed for missing chart axes", async function () {
     await userEvent.click(addPoint);
     await userEvent.click(addPoint);
 
+    // Re-grab all coordinate fields to ensure they are up to date
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+
     // Add coordinate inputs
     await userEvent.type(xInputs[0], "4");
     await userEvent.type(yInputs[0], "6");
