@@ -189,6 +189,10 @@ test("Alerts displayed for missing chart axes", async function () {
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
     spy.mockImplementation(function () {});
+
+    // Re-grab all coordinates to ensure they are up to date
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
 });
 
 /*
