@@ -235,9 +235,9 @@ test("Data correctly sent to chart generation function", async function () {
     const generateButton = domTesting.getByText(document, "Generate chart");
 
     // Add extra coord slots
-    await userEvent.click(addButton);
-    await userEvent.click(addButton);
-    await userEvent.click(addButton);
+    await user.click(addButton);
+    await user.click(addButton);
+    await user.click(addButton);
 
     // Reset input references
     xInputs = domTesting.getAllByLabelText(document, "X");
@@ -254,22 +254,33 @@ test("Data correctly sent to chart generation function", async function () {
     await user.type(yInputs[3], "8");
 
     // Set extraneous chart data
-    await userEvent.type(xLabel, "X");
-    await userEvent.type(yLabel, "Y");
-    await userEvent.type(chartTitle, "Title");
+    await user.type(xLabel, "X");
+    await user.type(yLabel, "Y");
+    await user.type(chartTitle, "Title");
     colorPicker.value = "#ff0000";
 
     // Generate graph
-    await userEvent.click(generateButton);
+    await user.click(generateButton);
 
     // Assertions
     expect(GenerateChartImg.mock.calls[0][0]).toBe("line");
-    expect(GenerateChartImg.mock.calls[0][1]).toMatchObject([
-        { x: 4, y: 6 },
-        { x: 1, y: 6 },
-        { x: 9, y: 4 },
-        { x: 2, y: 8 },
-    ]);
+    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+        x: "4",
+        y: "6",
+    });
+    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+        x: "1",
+        y: "6",
+    });
+    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+        x: "9",
+        y: "4",
+    });
+    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+        x: "2",
+        y: "8",
+    });
+    expect(GenerateChartImg.mock.calls[0][1].length).toBe(4);
     expect(GenerateChartImg.mock.calls[0][2]).toBe("X");
     expect(GenerateChartImg.mock.calls[0][3]).toBe("Y");
     expect(GenerateChartImg.mock.calls[0][4]).toBe("Title");
