@@ -237,9 +237,12 @@ test("Data correctly sent to chart generation function", async function () {
     );
     spy.mockImplementation(function () {});
 
+    await userEvent.click(addButton);
+    await userEvent.click(addButton);
+    await userEvent.click(addButton);
+
     await userEvent.type(xInputs[0], "1");
     await userEvent.type(yInputs[0], "2");
-    await userEvent.click(addButton);
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
