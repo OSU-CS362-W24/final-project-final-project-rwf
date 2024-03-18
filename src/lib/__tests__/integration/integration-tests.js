@@ -115,7 +115,6 @@ test("Alerts displayed for missing chart data", async function () {
     // Add references to dom elements for later use
     const xLabel = domTesting.getByLabelText(document, "X label");
     const yLabel = domTesting.getByLabelText(document, "Y label");
-    const addPoint = domTesting.getByText(document, "+");
     const generateGraph = domTesting.getByText(document, "Generate chart");
     let xInputs = domTesting.getAllByLabelText(document, "X");
     let yInputs = domTesting.getAllByLabelText(document, "Y");
@@ -130,6 +129,10 @@ test("Alerts displayed for missing chart data", async function () {
 
     // Generate graph and error message
     await userEvent.click(generateGraph);
+
+    // Re-grab all coordinates to ensure they are up to date
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
 
     // Assertions
     expect(spy).toHaveBeenCalledTimes(1);
@@ -152,6 +155,14 @@ test("Alerts displayed for missing chart axes", async function () {
         `${__dirname}/../../../line/line.html`,
         `${__dirname}/../../../line/line.js`
     );
+
+    // Add references to dom elements for later use
+    const xLabel = domTesting.getByLabelText(document, "X label");
+    const yLabel = domTesting.getByLabelText(document, "Y label");
+    const addPoint = domTesting.getByText(document, "+");
+    const generateGraph = domTesting.getByText(document, "Generate chart");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
 });
 
 /*
