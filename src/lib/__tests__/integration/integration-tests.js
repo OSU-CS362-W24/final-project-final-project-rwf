@@ -6,7 +6,6 @@ require("@testing-library/jest-dom");
 const domTesting = require("@testing-library/dom");
 const userEvent = require("@testing-library/user-event").default;
 jest.mock(`${__dirname}/../../generateChartImg.js`);
-const GenerateChartImg = require(`${__dirname}/../../generateChartImg.js`);
 
 const fs = require("fs");
 const { request } = require("http");
@@ -225,6 +224,15 @@ test("Alerts displayed for missing chart axes", async function () {
 test("Data correctly sent to chart generation function", async function () {
     // Setup for each test
     const user = userEvent.setup();
+
+    // Create mock
+    jest.mock(`${__dirname}/../../generateChartImg.js`);
+    const generateChartImgSpy = require(`${__dirname}/../../generateChartImg.js`);
+    generateChartImgSpy.mockImplementation(function () {
+        return "http://placekitten.com/480/480";
+    });
+
+    // Init files
     initDOMFromFiles(
         `${__dirname}/../../../line/line.html`,
         `${__dirname}/../../../line/line.js`
