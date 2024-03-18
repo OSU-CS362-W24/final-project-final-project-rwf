@@ -271,7 +271,9 @@ test("Data correctly sent to chart generation function", async function () {
     await user.type(xLabel, "X");
     await user.type(yLabel, "Y");
     await user.type(chartTitle, "Title");
-    colorPicker.value = "#ff0000";
+    await domTesting.fireEvent.input(colorPicker, {
+        target: { value: "#ff0000" },
+    });
 
     // Generate graph
     await user.click(generateButton);
