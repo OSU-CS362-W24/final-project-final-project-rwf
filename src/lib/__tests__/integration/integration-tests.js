@@ -193,6 +193,24 @@ test("Alerts displayed for missing chart axes", async function () {
     // Re-grab all coordinates to ensure they are up to date
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
+
+    // Assertions
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0]).toBe(
+        "Error: Must specify a label for both X and Y!"
+    );
+    expect(xLabel.value).toBe("");
+    expect(yLabel.value).toBe("");
+    expect(xInputs.length).toBe(4);
+    expect(yInputs.length).toBe(4);
+    expect(xInputs[0].value).toBe("4");
+    expect(yInputs[0].value).toBe("6");
+    expect(xInputs[1].value).toBe("1");
+    expect(yInputs[1].value).toBe("6");
+    expect(xInputs[2].value).toBe("9");
+    expect(yInputs[2].value).toBe("4");
+    expect(xInputs[3].value).toBe("2");
+    expect(yInputs[3].value).toBe("8");
 });
 
 /*
