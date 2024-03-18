@@ -29,8 +29,8 @@ test("Adding values in the chart builder works correctly", async function () {
         `${__dirname}/../../../line/line.js`
     );
 
-    xInputs = domTesting.getAllByLabelText(document, "X");
-    yInputs = domTesting.getAllByLabelText(document, "Y");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
     const addButton = domTesting.getByText(document, "+");
 
     await user.type(xInputs[0], "1");
@@ -63,8 +63,8 @@ test("Clearing chart data works correctly", async function () {
         `${__dirname}/../../../line/line.js`
     );
 
-    xInputs = domTesting.getAllByLabelText(document, "X");
-    yInputs = domTesting.getAllByLabelText(document, "Y");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
     const xLabel = domTesting.getByLabelText(document, "X label");
     const yLabel = domTesting.getByLabelText(document, "Y label");
     const chartTitle = domTesting.getByLabelText(document, "Chart title");
@@ -224,8 +224,8 @@ test("Data correctly sent to chart generation function", async function () {
     );
 
     // Set variables to access DOM elements later
-    xInputs = domTesting.getAllByLabelText(document, "X");
-    yInputs = domTesting.getAllByLabelText(document, "Y");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
     const xLabel = domTesting.getByLabelText(document, "X label");
     const yLabel = domTesting.getByLabelText(document, "Y label");
     const chartTitle = domTesting.getByLabelText(document, "Chart title");
@@ -245,8 +245,15 @@ test("Data correctly sent to chart generation function", async function () {
     await userEvent.click(addButton);
     await userEvent.click(addButton);
 
-    await userEvent.type(xInputs[0], "1");
-    await userEvent.type(yInputs[0], "2");
+    // Input coordinates
+    await user.type(xInputs[0], "4");
+    await user.type(yInputs[0], "6");
+    await user.type(xInputs[1], "1");
+    await user.type(yInputs[1], "6");
+    await user.type(xInputs[2], "9");
+    await user.type(yInputs[2], "4");
+    await user.type(xInputs[3], "2");
+    await user.type(yInputs[3], "8");
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
