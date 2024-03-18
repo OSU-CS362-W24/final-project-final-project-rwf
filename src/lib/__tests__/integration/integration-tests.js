@@ -133,6 +133,9 @@ test("Alerts displayed for missing chart data", async function () {
     // Assertions
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy.mock.calls[0][0]).toBe("Error: No data specified!");
+
+    // Release the alert function from the spy
+    spy.mockRestore();
 });
 
 /*
