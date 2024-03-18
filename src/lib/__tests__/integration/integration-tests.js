@@ -22,6 +22,12 @@ function initDOMFromFiles(htmlPath, jsPath) {
     });
 }
 
+beforeEach(function () {
+    window.localStorage.clear();
+    jest.resetModules();
+    jest.restoreAllMocks();
+});
+
 test("Adding values in the chart builder works correctly", async function () {
     const user = userEvent.setup();
 
