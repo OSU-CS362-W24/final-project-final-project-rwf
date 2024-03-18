@@ -139,6 +139,15 @@ test("Alerts displayed for missing chart data", async function () {
     spy.mockRestore();
 });
 
+test("Alerts displayed for missing chart axes", async function () {
+    // Setup for each test
+    const user = userEvent.setup();
+    initDOMFromFiles(
+        `${__dirname}/../../../line/line.html`,
+        `${__dirname}/../../../line/line.js`
+    );
+});
+
 /*
  test("Data correctly sent to chart generation function", async function () {
     const user = userEvent.setup();
