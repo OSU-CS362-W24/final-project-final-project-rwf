@@ -103,6 +103,43 @@ test("Clearing chart data works correctly", async function () {
     expect(colorPicker).toHaveValue(originalColor);
 });
 
+test("Alerts displayed for missing chart data and axis labels", async function () {
+    // Setup for each test
+    const user = userEvent.setup();
+    initDOMFromFiles(`${__dirname}/../../../line/line.html`, `${__dirname}/../../../line/line.js`);
+
+    // Add references to dom elements for later use
+    const xLabel = domTesting.getByLabelText(document, "X label");
+    const yLabel = domTesting.getByLabelText(document, "Y label");
+    const generateGraph = domTesting.getByText(document, "Generate chart");
+    let xInputs = domTesting.getAllByLabelText(document, "X");
+    let yInputs = domTesting.getAllByLabelText(document, "Y");
+
+    // Add spy to watch alert method
+    const spy = jest.spyOn(window, "alert");
+    spy.mockImplementation(function () {});
+
+    // Generate graph and error message
+    await user.click(generateGraph);
+
+    // Re-grab all coordinates to ensure they are up to date
+    xInputs = domTesting.getAllByLabelText(document, "X");
+    yInputs = domTesting.getAllByLabelText(document, "Y");
+
+    // Assertions
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0]).toBe("Error: No data specified!");
+    expect(xLabel.value).toBe("");
+    expect(yLabel.value).toBe("");
+    expect(xInputs.length).toBe(1);
+    expect(yInputs.length).toBe(1);
+    expect(xInputs[0].value).toBe("");
+    expect(yInputs[0].value).toBe("");
+
+    // Release the alert function from the spy
+    spy.mockRestore();
+});
+
 test("Alerts displayed for missing chart data", async function () {
     // Setup for each test
     const user = userEvent.setup();
