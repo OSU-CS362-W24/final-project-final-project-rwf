@@ -16,8 +16,7 @@ function initDOMFromFiles(htmlPath, jsPath) {
     document.open();
     document.write(html);
     document.close();
-
-    jest.isolateModules(() => {
+    jest.isolateModules(function () {
         require(jsPath);
     });
 }
@@ -34,16 +33,16 @@ test("Adding values in the chart builder works correctly", async function () {
     yInputs = domTesting.getAllByLabelText(document, "Y");
     const addButton = domTesting.getByText(document, "+");
 
-    await userEvent.type(xInputs[0], "1");
-    await userEvent.type(yInputs[0], "2");
-    await userEvent.click(addButton);
+    await user.type(xInputs[0], "1");
+    await user.type(yInputs[0], "2");
+    await user.click(addButton);
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
 
-    await userEvent.type(xInputs[1], "3");
-    await userEvent.type(yInputs[1], "4");
-    await userEvent.click(addButton);
+    await user.type(xInputs[1], "3");
+    await user.type(yInputs[1], "4");
+    await user.click(addButton);
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
@@ -74,22 +73,22 @@ test("Clearing chart data works correctly", async function () {
     const clearButton = domTesting.getByText(document, "Clear chart data");
     const originalColor = colorPicker.value;
 
-    await userEvent.type(xInputs[0], "1");
-    await userEvent.type(yInputs[0], "2");
-    await userEvent.click(addButton);
+    await user.type(xInputs[0], "1");
+    await user.type(yInputs[0], "2");
+    await user.click(addButton);
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
 
-    await userEvent.type(xInputs[1], "3");
-    await userEvent.type(yInputs[1], "4");
+    await user.type(xInputs[1], "3");
+    await user.type(yInputs[1], "4");
 
-    await userEvent.type(xLabel, "X");
-    await userEvent.type(yLabel, "Y");
-    await userEvent.type(chartTitle, "Title");
+    await user.type(xLabel, "X");
+    await user.type(yLabel, "Y");
+    await user.type(chartTitle, "Title");
     colorPicker.value = "#ff0000";
 
-    await userEvent.click(clearButton);
+    await user.click(clearButton);
 
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
@@ -120,15 +119,15 @@ test("Alerts displayed for missing chart data", async function () {
     let yInputs = domTesting.getAllByLabelText(document, "Y");
 
     // Add inputs
-    await userEvent.type(xLabel, "Placeholder for X label");
-    await userEvent.type(yLabel, "Placeholder for Y label");
+    await user.type(yLabel, "Placeholder for Y label");
+    await user.type(xLabel, "Placeholder for X label");
 
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
     spy.mockImplementation(function () {});
 
     // Generate graph and error message
-    await userEvent.click(generateGraph);
+    await user.click(generateGraph);
 
     // Re-grab all coordinates to ensure they are up to date
     xInputs = domTesting.getAllByLabelText(document, "X");
@@ -165,30 +164,30 @@ test("Alerts displayed for missing chart axes", async function () {
     let yInputs = domTesting.getAllByLabelText(document, "Y");
 
     // Add three coordinates
-    await userEvent.click(addPoint);
-    await userEvent.click(addPoint);
-    await userEvent.click(addPoint);
+    await user.click(addPoint);
+    await user.click(addPoint);
+    await user.click(addPoint);
 
     // Re-grab all coordinate fields to ensure they are up to date
     xInputs = domTesting.getAllByLabelText(document, "X");
     yInputs = domTesting.getAllByLabelText(document, "Y");
 
     // Add coordinate inputs
-    await userEvent.type(xInputs[0], "4");
-    await userEvent.type(yInputs[0], "6");
-    await userEvent.type(xInputs[1], "1");
-    await userEvent.type(yInputs[1], "6");
-    await userEvent.type(xInputs[2], "9");
-    await userEvent.type(yInputs[2], "4");
-    await userEvent.type(xInputs[3], "2");
-    await userEvent.type(yInputs[3], "8");
+    await user.type(xInputs[0], "4");
+    await user.type(yInputs[0], "6");
+    await user.type(xInputs[1], "1");
+    await user.type(yInputs[1], "6");
+    await user.type(xInputs[2], "9");
+    await user.type(yInputs[2], "4");
+    await user.type(xInputs[3], "2");
+    await user.type(yInputs[3], "8");
 
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
     spy.mockImplementation(function () {});
 
     // Generate graph and error message
-    await userEvent.click(generateGraph);
+    await user.click(generateGraph);
 
     // Re-grab all coordinates to ensure they are up to date
     xInputs = domTesting.getAllByLabelText(document, "X");
