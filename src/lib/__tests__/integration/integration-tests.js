@@ -183,12 +183,12 @@ test("Alerts displayed for missing chart axes", async function () {
     await userEvent.type(xInputs[3], "2");
     await userEvent.type(yInputs[3], "8");
 
-    // Generate graph and error message
-    await userEvent.click(generateGraph);
-
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
     spy.mockImplementation(function () {});
+
+    // Generate graph and error message
+    await userEvent.click(generateGraph);
 
     // Re-grab all coordinates to ensure they are up to date
     xInputs = domTesting.getAllByLabelText(document, "X");
