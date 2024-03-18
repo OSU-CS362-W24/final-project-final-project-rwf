@@ -279,28 +279,31 @@ test("Data correctly sent to chart generation function", async function () {
     await user.click(generateButton);
 
     // Assertions
-    expect(GenerateChartImg.mock.calls[0][0]).toBe("line");
-    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+    expect(generateChartImgSpy.mock.calls[0][0]).toBe("line");
+    expect(generateChartImgSpy.mock.calls[0][1]).toContainEqual({
         x: "4",
         y: "6",
     });
-    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+    expect(generateChartImgSpy.mock.calls[0][1]).toContainEqual({
         x: "1",
         y: "6",
     });
-    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+    expect(generateChartImgSpy.mock.calls[0][1]).toContainEqual({
         x: "9",
         y: "4",
     });
-    expect(GenerateChartImg.mock.calls[0][1]).toContainEqual({
+    expect(generateChartImgSpy.mock.calls[0][1]).toContainEqual({
         x: "2",
         y: "8",
     });
-    expect(GenerateChartImg.mock.calls[0][1].length).toBe(4);
-    expect(GenerateChartImg.mock.calls[0][2]).toBe("X");
-    expect(GenerateChartImg.mock.calls[0][3]).toBe("Y");
-    expect(GenerateChartImg.mock.calls[0][4]).toBe("Title");
-    expect(GenerateChartImg.mock.calls[0][5]).toBe("#ff0000");
+    expect(generateChartImgSpy.mock.calls[0][1].length).toBe(4);
+    expect(generateChartImgSpy.mock.calls[0][2]).toBe("X");
+    expect(generateChartImgSpy.mock.calls[0][3]).toBe("Y");
+    expect(generateChartImgSpy.mock.calls[0][4]).toBe("Title");
+    expect(generateChartImgSpy.mock.calls[0][5]).toBe("#ff0000");
+    expect(generateChartImgSpy.mock.results[0].value).toBe(
+        "http://placekitten.com/480/480"
+    );
 
     generateChartImgSpy.mockRestore();
 });
