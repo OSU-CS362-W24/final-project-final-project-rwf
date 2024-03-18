@@ -126,6 +126,7 @@ test("Alerts displayed for missing chart data", async function () {
 
     // Add spy to watch alert method
     const spy = jest.spyOn(window, "alert");
+    spy.mockImplementation(function () {});
 
     // Generate graph and error message
     await userEvent.click(generateGraph);
