@@ -16,6 +16,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:unit
+      - run: npm run test:integration
       - run: npm run test:ete
       - uses: actions/upload-artifact@v3
         with:
@@ -25,4 +26,3 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: dist/
-  
