@@ -6,7 +6,8 @@
     "build": "webpack",
     "start": "webpack serve --open",
     "test": "jest --verbose=true",
-    "test:integration": "jest -i __tests__/integration/ --verbose=true"
+    "test:integration": "jest -i __tests__/integration/ --verbose=true",
+    "test:unit": "jest -i __tests__/unit/ --verbose=true"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.1",
@@ -18,11 +19,11 @@
     "html-webpack-plugin": "^5.5.1",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.7.0",
-    "jsdom": "^24.0.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack-dev-server": "^4.15.0",
+    "whatwg-fetch": "^3.6.20"
   },
   "jest": {
     "moduleNameMapper": {
