@@ -15,7 +15,7 @@ jobs:
                   node-version: 18
             - run: npm ci
             - run: npm run build
-            - run: npm test:integration
+            - run: npm run test:integration
             - if: ${{ inputs.upload-pages-artifact }}
               uses: actions/upload-pages-artifact@v1
               with:
