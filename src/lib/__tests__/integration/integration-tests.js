@@ -108,7 +108,7 @@ test("Alerts displayed for missing chart data and axis labels", async function (
     const user = userEvent.setup();
     initDOMFromFiles(`${__dirname}/../../../line/line.html`, `${__dirname}/../../../line/line.js`);
 
-    // Add references to dom elements for later use
+    // Add references to dom elements for later uses
     const xLabel = domTesting.getByLabelText(document, "X label");
     const yLabel = domTesting.getByLabelText(document, "Y label");
     const generateGraph = domTesting.getByText(document, "Generate chart");
