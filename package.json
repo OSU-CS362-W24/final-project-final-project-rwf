@@ -5,6 +5,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
+    "test": "jest --verbose=true",
+    "test:integration": "jest -i __tests__/integration/ --verbose=true",
     "test:unit": "jest -i __tests__/unit/ --verbose=true"
   },
   "devDependencies": {
@@ -27,5 +29,8 @@
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/src/__mocks__/styleMock.js"
     }
+  },
+  "dependencies": {
+    "whatwg-fetch": "^3.6.20"
   }
 }

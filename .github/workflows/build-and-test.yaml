@@ -1,23 +1,22 @@
 name: "Build and test"
 on:
-  workflow_call:
-    inputs:
-      upload-pages-artifact:
-        type: boolean
-        required: false
-jobs: 
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:  
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test:unit
-      - if: ${{ inputs.upload-pages-artifact }}
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dist/
-  
+    workflow_call:
+        inputs:
+            upload-pages-artifact:
+                type: boolean
+                required: false
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - run: npm ci
+            - run: npm run build
+            - run: npm run test:integration
+            - if: ${{ inputs.upload-pages-artifact }}
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  path: dist/
